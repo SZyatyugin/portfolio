@@ -3,6 +3,9 @@ let nav_bar_sticky = () => {
     function get(elem) {
         return document.querySelector(elem)
     }
+    function getAll(elem){
+        return document.querySelectorAll(elem)
+    }
     window.addEventListener('scroll', check_coords_place_navbar);
 
     function check_coords_place_navbar() {
@@ -33,36 +36,15 @@ let nav_bar_sticky = () => {
     get('.menu').addEventListener('click',scroll_to_element);
 
 function scroll_to_element(e){
-
-   if(e.target.innerHTML=='HOME'){
-    get('.header').scrollIntoView({
-        block: 'start',
-        behavior: 'smooth'
-    });
-   }else if(e.target.innerHTML=="ABOUT"){
-   
-    get('.section__about').scrollIntoView({
-        block: 'start',
-        behavior: 'smooth'
-    });
-    get('.section__about').classList.add('move');
-   }else if(e.target.innerHTML=="PORTFOLIO"){
-    get('.section__portfolio').scrollIntoView({
-        block: 'start',
-        behavior: 'smooth'
-    }); 
-   }else if(e.target.innerHTML=="SERVICES"){
-    get('.section__services').scrollIntoView({
-        block: 'start',
-        behavior: 'smooth'
-    }); 
-   }else if(e.target.innerHTML=='CONTACT'){
-    get('.footer').scrollIntoView({
-        block: 'start',
-        behavior: 'smooth'
-    }); 
-   }
- 
+let clicked_menu_list=Object.values(getAll('.menu_list_items')).find((elem)=>{
+    if(elem.innerHTML==e.target.innerHTML){
+        return elem
+    }
+}).innerHTML.toLowerCase();
+get(`.${clicked_menu_list}`).scrollIntoView({
+    block:'start',
+    behavior:'smooth'
+})
 }
 get('.fa-bars').addEventListener('click',show_menu);
 function show_menu(e){
