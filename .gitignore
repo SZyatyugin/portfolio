@@ -7,7 +7,7 @@
 /coverage
 
 # production
-/src/**
+/src/app/
 
 # misc
 .DS_Store
