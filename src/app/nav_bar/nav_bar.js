@@ -11,7 +11,8 @@ let nav_bar_sticky = () => {
     function check_coords_place_navbar() {
         if(document.body.clientWidth>767){
             if (window.pageYOffset > 100) {
-                get('.nav_bar').classList.add("fixed");
+                    get('.nav_bar').classList.add("fixed");
+                }
             } else {
                 get('.nav_bar').classList.remove('fixed');
             }
@@ -21,34 +22,39 @@ let nav_bar_sticky = () => {
                 get('.message').removeAttribute('style')
             }
         }
-    }
+    
     get('.header_circle_button').addEventListener('click', scroll_down_click_circle);
 
     function scroll_down_click_circle() {
        
-        get('.section__about').scrollIntoView({
+        get('.section-mainInfo').scrollIntoView({
             block: 'start',
             behavior: 'smooth'
         });
-        get('.section__about').classList.add('move');
+        get('.section-mainInfo').classList.add('move');
     }
 
     get('.menu').addEventListener('click',scroll_to_element);
 
 function scroll_to_element(e){
-let clicked_menu_list=Object.values(getAll('.menu_list_items')).find((elem)=>{
-    if(elem.innerHTML==e.target.innerHTML){
-        return elem
+
+    if(e.target.className=='menu_close'||e.target.className==''){
+        e.preventDefault();
+        return false
+    }else{
+        let clicked_menu_list=Object.values(getAll('.menu_list_items')).find((elem)=>{
+            if(elem.innerHTML==e.target.innerHTML){
+                return elem
+            }
+        }).innerHTML.toLowerCase();
+        get(`.${clicked_menu_list}`).scrollIntoView({
+            block:'start',
+            behavior:'smooth'
+        })
     }
-}).innerHTML.toLowerCase();
-get(`.${clicked_menu_list}`).scrollIntoView({
-    block:'start',
-    behavior:'smooth'
-})
 }
-get('.fa-bars').addEventListener('click',show_menu);
+get('.nav_bar__menu-icon').addEventListener('click',show_menu);
 function show_menu(e){
-    console.log(e)
     if(e.target.className=='menu_close'){
         get('.menu').classList.remove('active')
     }else{
