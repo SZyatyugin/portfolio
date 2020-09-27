@@ -21,6 +21,9 @@ package.json
 package-lock.json
 postcss.config.js
 webpack.config.js
+.prettierrc.json
+.eslintrc.json
+.babelrc.json
 
 npm-debug.log*
 yarn-debug.log*
